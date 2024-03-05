@@ -12,11 +12,11 @@ class Db {
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
 
-    public function execute($query_string){
+    public function execute($query_string,$params){
         //Sagatavo sql izpildei
         $query = $this->pdo->prepare($query_string);
         //Izpildit sql
-        $query->execute();
+        $query->execute($params);
         return $query;
     }
 }
