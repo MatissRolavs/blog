@@ -3,6 +3,7 @@
 require "functions.php";
 require "Db.php";
 
+
 $config = require("config.php");
 
 $query = "SELECT * FROM posts JOIN categories ON posts.category_id = categories.id";
@@ -23,21 +24,4 @@ elseif(isset($_GET["category"])&&$_GET["category"]!=""){
 $db = new Db($config);
 $posts = $db->execute($query,$params)->fetchAll();
 
-echo "<form>";
-echo "<input name='id' value='" . ($id ?? '') ." '/>";
-echo "<button>Submit ID</button>";
-echo "</form>";
-
-echo "<form>";
-echo "<input name='category' value='" . ($category ?? '') ." '/>";
-echo "<button>Submit Category</button>";
-echo "</form>";
-
-echo "<h1>Posts</h1>";
-
-echo "<ul>";
-foreach($posts as $post){
-    echo "<li>".$post["title"]."</li>";
-}
-echo "</ul>"
-?>
+require "index.view.php";
