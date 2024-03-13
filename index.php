@@ -1,28 +1,18 @@
 <?php
 
 require "functions.php";
-require "Db.php";
 
+$url_array = parse_url($_SERVER["REQUEST_URI"]);
+$url = $url_array["path"];
 
-$config = require("config.php");
-
-$query = "SELECT * FROM posts JOIN categories ON posts.category_id = categories.id";
-$params = [];
-
-if(isset($_GET["id"]) && $_GET["id"]!=""){
-    $id = trim($_GET["id"]);
-    $query .= " WHERE posts.id=:id";
-    $params = [":id" => $id];
-}
-elseif(isset($_GET["category"])&&$_GET["category"]!=""){
-    $category = trim($_GET["category"]);
-    $query .= " WHERE name=:category";
-    $params = [":category" => $category];
+if($url == "/"){
+    require "controllers/index.php";
 }
 
+if($url == "/about"){
+    require "controllers/about.php";
+}
 
-$db = new Db($config);
-$posts = $db->execute($query,$params)->fetchAll();
-
-$title = "Posts";
-require "views/index.view.php";
+if($url == "/story"){
+    require "controllers/story.php";
+}
