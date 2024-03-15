@@ -2,6 +2,7 @@
 
 require "Db.php";
 
+
 $config = require("config.php");
 
 $query = "SELECT * FROM posts JOIN categories ON posts.category_id = categories.id";
