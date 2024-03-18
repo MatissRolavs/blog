@@ -24,4 +24,4 @@ $db = new Db($config);
 $posts = $db->execute($query,$params)->fetchAll();
 
 $title = "Posts";
-require "views/index.view.php";
+require "views/posts.view.php";

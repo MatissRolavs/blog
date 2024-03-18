@@ -40,3 +40,8 @@ WHERE id=1;
 UPDATE posts
 SET category_id = (SELECT id FROM categories WHERE name = "food")
 WHERE id=2;
+
+INSERT INTO posts
+(title, category_id)
+VALUES
+("Blog 3","2")
