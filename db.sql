@@ -45,3 +45,9 @@ INSERT INTO posts
 (title, category_id)
 VALUES
 ("Blog 3","2")
+
+CREATE TABLE users(
+id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+email VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL
+);

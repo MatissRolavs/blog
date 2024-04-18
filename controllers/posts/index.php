@@ -1,11 +1,13 @@
 <?php
-
+auth();
 require "Db.php";
 
 
 $config = require("config.php");
 
-$query = "SELECT * FROM posts JOIN categories ON posts.category_id = categories.id";
+$db = new Db($config);
+
+$query = "SELECT posts.* FROM posts";
 $params = [];
 
 if(isset($_GET["id"]) && $_GET["id"]!=""){
@@ -15,13 +17,12 @@ if(isset($_GET["id"]) && $_GET["id"]!=""){
 }
 elseif(isset($_GET["category"])&&$_GET["category"]!=""){
     $category = trim($_GET["category"]);
-    $query .= " WHERE name=:category";
+    $query .= " JOIN categories ON posts.category_id = categories.id WHERE name=:category";
     $params = [":category" => $category];
 }
 
 
-$db = new Db($config);
-$posts = $db->execute($query,$params)->fetchAll();
 
+$posts = $db->execute($query,$params)->fetchAll();
 $title = "Posts";
-require "views/posts.view.php";
+require "views/posts/index.view.php";
